@@ -4,30 +4,95 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --container-bg: white;
+    --text-primary: #333;
+    --text-secondary: #999;
+    --border-color: #ddd;
+    --input-focus: #667eea;
+    --button-bg: #667eea;
+    --button-hover: #5568d3;
+    --delete-bg: #ff6b6b;
+    --delete-hover: #ee5a52;
+    --item-bg: #f8f9fa;
+    --item-border: #667eea;
+}
+
+body.dark-mode {
+    --bg-gradient-start: #1e1e2e;
+    --bg-gradient-end: #16213e;
+    --container-bg: #2a2a3e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #999;
+    --border-color: #444;
+    --input-focus: #667eea;
+    --button-bg: #667eea;
+    --button-hover: #5568d3;
+    --delete-bg: #ff6b6b;
+    --delete-hover: #ee5a52;
+    --item-bg: #3a3a4e;
+    --item-border: #667eea;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     min-height: 100vh;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background 0.3s ease;
 }
 
 .container {
-    background: white;
+    background: var(--container-bg);
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     padding: 30px;
     max-width: 500px;
     width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
 h1 {
     text-align: center;
-    color: #333;
-    margin-bottom: 30px;
+    color: var(--text-primary);
     font-size: 28px;
+    flex: 1;
+    transition: color 0.3s ease;
+}
+
+.theme-toggle {
+    background: none;
+    border: 2px solid var(--button-bg);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--button-bg);
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
 }
 
 .input-container {
@@ -39,20 +104,22 @@ h1 {
 #todoInput {
     flex: 1;
     padding: 12px 15px;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border-color);
     border-radius: 5px;
     font-size: 16px;
-    transition: border-color 0.3s;
+    background-color: var(--container-bg);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
 }
 
 #todoInput:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--input-focus);
 }
 
 #addBtn {
     padding: 12px 30px;
-    background-color: #667eea;
+    background-color: var(--button-bg);
     color: white;
     border: none;
     border-radius: 5px;
@@ -63,7 +130,7 @@ h1 {
 }
 
 #addBtn:hover {
-    background-color: #5568d3;
+    background-color: var(--button-hover);
 }
 
 #addBtn:active {
@@ -79,17 +146,18 @@ h1 {
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    background-color: #f8f9fa;
-    border-left: 4px solid #667eea;
+    background-color: var(--item-bg);
+    border-left: 4px solid var(--item-border);
     margin-bottom: 10px;
     border-radius: 5px;
     animation: slideIn 0.3s ease-out;
     gap: 12px;
+    transition: background-color 0.3s ease;
 }
 
 .todo-item.completed .todo-text {
     text-decoration: line-through;
-    color: #999;
+    color: var(--text-secondary);
 }
 
 @keyframes slideIn {
@@ -107,19 +175,19 @@ h1 {
     width: 20px;
     height: 20px;
     cursor: pointer;
-    accent-color: #667eea;
+    accent-color: var(--button-bg);
     flex-shrink: 0;
 }
 
 .todo-text {
-    color: #333;
+    color: var(--text-primary);
     font-size: 16px;
     flex: 1;
     transition: all 0.3s ease;
 }
 
 .delete-btn {
-    background-color: #ff6b6b;
+    background-color: var(--delete-bg);
     color: white;
     border: none;
     padding: 8px 15px;
@@ -130,7 +198,7 @@ h1 {
 }
 
 .delete-btn:hover {
-    background-color: #ee5a52;
+    background-color: var(--delete-hover);
 }
 
 .delete-btn:active {
@@ -141,7 +209,7 @@ h1 {
     content: "No todos yet. Add one to get started!";
     display: block;
     text-align: center;
-    color: #999;
+    color: var(--text-secondary);
     padding: 30px;
     font-style: italic;
 }

@@ -2,11 +2,38 @@
 const todoInput = document.getElementById('todoInput');
 const addBtn = document.getElementById('addBtn');
 const todoList = document.getElementById('todoList');
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
 
-// Load todos from localStorage when page loads
+// Initialize theme on page load
 document.addEventListener('DOMContentLoaded', () => {
+    initializeTheme();
     loadTodos();
 });
+
+// Theme toggle
+themeToggle.addEventListener('click', toggleTheme);
+
+function initializeTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        updateThemeIcon();
+    }
+}
+
+function toggleTheme() {
+    body.classList.toggle('dark-mode');
+    const isDarkMode = body.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    updateThemeIcon();
+}
+
+function updateThemeIcon() {
+    const icon = themeToggle.querySelector('.theme-icon');
+    const isDarkMode = body.classList.contains('dark-mode');
+    icon.textContent = isDarkMode ? '☀️' : '🌙';
+}
 
 // Add todo when "Add" button is clicked
 addBtn.addEventListener('click', addTodo);
